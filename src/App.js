@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import CharacterInfo from './pages/CharacterInfo';
 
 function App() {
+  const result = useRouteMatch();
+  console.log(result.url);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Switch>
+          {/* pokemonId - identifier to locate a single character profile */}
+          <Route exact path={`${result.url}pokemon/:pokemonId`}>
+            <CharacterInfo />
+          </Route>
+          <Route exact path={result.url}>
+            <LandingPage />
+          </Route>
+        </Switch>
     </div>
   );
 }
